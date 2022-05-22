@@ -80,26 +80,29 @@ public class StdChassTile : MonoBehaviour
         {
             if (buttonEvent.Pressed)
             {
-                var map = piece_script.piece.moveMap;
-                foreach (var tile in board_script.GetTile())
+                Chess.MoveMap map = piece_script?.piece.moveMap;
+                if (map != null) // if exist pice on this tile
                 {
-                    tile.GetXY(out int x, out int y);
-                    if ((map.map[x, y] & Chess.MoveMap.Status.MoveAble) != 0)
+                    foreach (var tile in board_script.GetTile())
                     {
-                        tile.state = State.Moveable;
-                        tile.seletable = true;
-                        tile.SetStateVisual();
+                        tile.GetXY(out int x, out int y);
+                        if ((map.map[x, y] & Chess.MoveMap.Status.MoveAble) != 0)
+                        {
+                            tile.state = State.Moveable;
+                            tile.seletable = true;
+                            tile.SetStateVisual();
+                        }
+                        else
+                        {
+                            tile.state = State.None;
+                            tile.seletable &= tile.state != State.Moveable;
+                            tile.SetStateVisual();
+                        }
                     }
-                    else
-                    {
-                        tile.state = State.None;
-                        tile.seletable &= tile.state != State.Moveable;
-                        tile.SetStateVisual();
-                    }
-                }
 
-                state = State.Selected;
-                SetSelectedVisual();              
+                    state = State.Selected;
+                    SetSelectedVisual();
+                }         
             }
             else
             {
