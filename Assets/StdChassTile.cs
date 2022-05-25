@@ -81,7 +81,11 @@ public class StdChassTile : MonoBehaviour
             if (buttonEvent.Pressed)
             {
                 Chess.MoveMap map = piece_script?.piece.moveMap;
-                if (map != null) // if exist pice on this tile
+                if (state == State.Moveable)
+                {
+                    SetMoveableVisual();
+                }
+                else if (map != null) // if exist pice on this tile
                 {
                     foreach (var tile in board_script.GetTile())
                     {
@@ -101,10 +105,6 @@ public class StdChassTile : MonoBehaviour
                     }
                     state = State.Selected;
                     SetSelectedVisual(); 
-                }
-                else if(state == State.Moveable)
-                {
-                    SetMoveableVisual();
                 }
             }
             else
