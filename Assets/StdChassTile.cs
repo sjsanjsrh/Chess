@@ -99,10 +99,13 @@ public class StdChassTile : MonoBehaviour
                             tile.SetStateVisual();
                         }
                     }
-
                     state = State.Selected;
-                    SetSelectedVisual();
-                }         
+                    SetSelectedVisual(); 
+                }
+                else if(state == State.Moveable)
+                {
+                    SetMoveableVisual();
+                }
             }
             else
             {
