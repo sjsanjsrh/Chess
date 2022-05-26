@@ -147,33 +147,47 @@ namespace Ernestoyaquello.Chess.Models
 
         private static int GetPieceCanonicValue(PieceType type)
         {
-            return type switch
+            switch (type)
             {
-                PieceType.Rook => 5,
-                PieceType.Knight => 3,
-                PieceType.Bishop => 3,
-                PieceType.Queen => 9,
-                PieceType.King => 4,
-                PieceType.Pawn => 1,
-                _ => 0,
-            };
+                case PieceType.Rook:
+                    return 5;
+                case PieceType.Knight: 
+                    return 3;
+                case PieceType.Bishop: 
+                    return 3;
+                case PieceType.Queen: 
+                    return 9;
+                case PieceType.King: 
+                    return 4;
+                case PieceType.Pawn: 
+                    return 1;
+                default:
+                    return 0;
+            }
         }
 
         private static int CalculatePieceHeuristicValue(PieceType type, PiecePosition position, Player player)
         {
             var verticalIndex = player == Player.First ? (int)position.VerticalPosition : (7 - (int)position.VerticalPosition);
             var horizontalIndex = player == Player.First ? (int)position.HorizontalPosition : (7 - (int)position.HorizontalPosition);
-
-            return type switch
+            
+            switch(type)
             {
-                PieceType.Rook => 510 + _rookPositionValues[verticalIndex][horizontalIndex],     // Min : 505 // Max : 520
-                PieceType.Knight => 320 + _knightPositionValues[verticalIndex][horizontalIndex], // Min : 270 // Max : 340
-                PieceType.Bishop => 333 + _bishopPositionValues[verticalIndex][horizontalIndex], // Min : 313 // Max : 343
-                PieceType.Queen => 880 + _queenPositionValues[verticalIndex][horizontalIndex],   // Min : 860 // Max : 885
-                PieceType.Pawn => 100 + _pawnPositionValues[verticalIndex][horizontalIndex],     // Min :  80 // Max : 150
-                PieceType.King => 1000,
-                _ => 0,
-            };
+                case PieceType.Rook:
+                    return 510 + _rookPositionValues[verticalIndex][horizontalIndex];     // Min : 505 // Max : 520
+                case PieceType.Knight:
+                    return 320 + _knightPositionValues[verticalIndex][horizontalIndex]; // Min : 270 // Max : 340
+                case PieceType.Bishop:
+                    return 333 + _bishopPositionValues[verticalIndex][horizontalIndex]; // Min : 313 // Max : 343
+                case PieceType.Queen:
+                    return 880 + _queenPositionValues[verticalIndex][horizontalIndex];   // Min : 860 // Max : 885
+                case PieceType.Pawn:
+                    return 100 + _pawnPositionValues[verticalIndex][horizontalIndex];     // Min :  80 // Max : 150
+                case PieceType.King:
+                    return 1000;
+                default:
+                    return 0;
+            }
         }
 
         public override string ToString()

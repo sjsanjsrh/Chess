@@ -86,20 +86,26 @@ namespace Ernestoyaquello.Chess.Models
         private List<ChessMoveInfo> CalculateValidMovesForPiece(Piece piece, bool filterOutInvalidKingMoves)
         {
             var forwardMotion = piece.Player == Player.First ? -1 : 1;
-            var moves = piece.Type switch
+            
+            switch (piece.Type)
             {
-                PieceType.Rook => this.CalculateValidMovesForRook(piece, forwardMotion),
-                PieceType.Knight => this.CalculateValidMovesForKnight(piece, forwardMotion),
-                PieceType.Bishop => this.CalculateValidMovesForBishop(piece, forwardMotion),
-                PieceType.Queen => this.CalculateValidMovesForQueen(piece, forwardMotion),
-                PieceType.Pawn => this.CalculateValidMovesForPawn(piece, forwardMotion),
-                PieceType.King => filterOutInvalidKingMoves
+                case PieceType.Rook:
+                    return this.CalculateValidMovesForRook(piece, forwardMotion);
+                case PieceType.Knight:
+                    return this.CalculateValidMovesForKnight(piece, forwardMotion);
+                case PieceType.Bishop:
+                    return this.CalculateValidMovesForBishop(piece, forwardMotion);
+                case PieceType.Queen:
+                    return this.CalculateValidMovesForQueen(piece, forwardMotion);
+                case PieceType.Pawn:
+                    return this.CalculateValidMovesForPawn(piece, forwardMotion);
+                case PieceType.King:
+                    return filterOutInvalidKingMoves
                     ? FilterOutInvalidKingMoves(piece.Player, this.CalculateMovesForKing(piece, forwardMotion), forwardMotion)
-                    : this.CalculateMovesForKing(piece, forwardMotion),
-                _ => new List<ChessMoveInfo>(),
-            };
-
-            return moves;
+                    : this.CalculateMovesForKing(piece, forwardMotion);
+                default:
+                    return new List<ChessMoveInfo>();
+            }
         }
 
         private List<ChessMoveInfo> FilterOutInvalidKingMoves(Player player, List<ChessMoveInfo> uncheckedKingMoves, int forwardMotion)
@@ -292,7 +298,10 @@ namespace Ernestoyaquello.Chess.Models
 
         internal ChessMoveInfo CreateSimpleMove(Piece pieceToMove, PiecePosition pieceDestination, Piece pieceToCapture = null)
         {
-            pieceToCapture ??= GetPiece(pieceDestination);
+            if (pieceToCapture == null)
+            {
+                pieceToCapture = GetPiece(pieceDestination);
+            }
             pieceToCapture = !pieceToCapture.IsNone() && pieceToCapture.Player != pieceToMove.Player ? pieceToCapture : null;
             var singleMoveStep = new ChessMoveStepInfo(pieceToMove.Position, pieceDestination, pieceToMove, pieceToCapture);
             return CreateMove(singleMoveStep);

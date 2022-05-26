@@ -12,31 +12,51 @@ namespace Ernestoyaquello.Chess.Data
     {
         public static PuzzleSolution GetPuzzleSolution(ChessBoardLayoutType layoutType)
         {
-            return layoutType switch
+            switch (layoutType)
             {
-                ChessBoardLayoutType.Puzzle => PuzzleSolution,
-                ChessBoardLayoutType.Puzzle2 => Puzzle2Solution,
-                ChessBoardLayoutType.Puzzle3 => Puzzle3Solution,
-                ChessBoardLayoutType.Puzzle4 => Puzzle4Solution,
-                ChessBoardLayoutType.Puzzle5 => Puzzle5Solution,
-                ChessBoardLayoutType.Puzzle6 => Puzzle6Solution,
+                case ChessBoardLayoutType.Puzzle:
+                    return PuzzleSolution;
+                case ChessBoardLayoutType.Puzzle2:
+                    return Puzzle2Solution;
+                case ChessBoardLayoutType.Puzzle3:
+                    return Puzzle3Solution;
+                case ChessBoardLayoutType.Puzzle4:
+                    return Puzzle4Solution;
+                case ChessBoardLayoutType.Puzzle5:
+                    return Puzzle5Solution;
+                case ChessBoardLayoutType.Puzzle6:
+                    return Puzzle6Solution;
+                default:
+                    throw new System.ArgumentException($"Invalid layout type: {layoutType}");
             };
         }
 
         private static Piece[][] GetBoardLayout(ChessBoardLayoutType layoutType)
         {
-            return layoutType switch
+            switch (layoutType)
             {
-                ChessBoardLayoutType.Default => Default,
-                ChessBoardLayoutType.PawnReplacementTest => PawnReplacementTest,
-                ChessBoardLayoutType.CastlingTest => CastlingTest,
-                ChessBoardLayoutType.EnPassantTest => EnPassantTest,
-                ChessBoardLayoutType.Puzzle => Puzzle,
-                ChessBoardLayoutType.Puzzle2 => Puzzle2,
-                ChessBoardLayoutType.Puzzle3 => Puzzle3,
-                ChessBoardLayoutType.Puzzle4 => Puzzle4,
-                ChessBoardLayoutType.Puzzle5 => Puzzle5,
-                ChessBoardLayoutType.Puzzle6 => Puzzle6,
+                case ChessBoardLayoutType.Default:
+                    return Default;
+                case ChessBoardLayoutType.PawnReplacementTest:
+                    return PawnReplacementTest;
+                case ChessBoardLayoutType.CastlingTest:
+                    return CastlingTest;
+                case ChessBoardLayoutType.EnPassantTest:
+                    return EnPassantTest;
+                case ChessBoardLayoutType.Puzzle:
+                    return Puzzle;
+                case ChessBoardLayoutType.Puzzle2:
+                    return Puzzle2;
+                case ChessBoardLayoutType.Puzzle3:
+                    return Puzzle3;
+                case ChessBoardLayoutType.Puzzle4:
+                    return Puzzle4;
+                case ChessBoardLayoutType.Puzzle5:
+                    return Puzzle5;
+                case ChessBoardLayoutType.Puzzle6:
+                    return Puzzle6;
+                default:
+                    throw new System.ArgumentException($"Invalid layout type: {layoutType}");
             };
         }
 
@@ -56,8 +76,8 @@ namespace Ernestoyaquello.Chess.Data
 
             foreach (var boardPiece in boardPieces)
             {
-                var defaultPiece = defaultPieces.FirstOrDefault(defaultPiece => defaultPiece.WithPosition(default).Equals(boardPiece.WithPosition(default).WithNumberOfPlayedMoves(0)));
-                defaultPieces.Remove(defaultPiece);
+                var _defaultPiece = defaultPieces.FirstOrDefault(defaultPiece => defaultPiece.WithPosition(default).Equals(boardPiece.WithPosition(default).WithNumberOfPlayedMoves(0)));
+                defaultPieces.Remove(_defaultPiece);
             }
 
             foreach (var capturedPiece in defaultPieces)
