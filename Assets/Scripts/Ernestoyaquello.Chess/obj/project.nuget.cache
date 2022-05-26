@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ezawuo16ipR3/kCB9DRMnraIB8G7Z4+bfYD0+U5q2MXnD0puHOX7X2wh1uONiZA4sZ2l8B12MFTRQuRjufN9QQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\CKIRUser\\Documents\\GitHub\\TwoPlayerZeroSumGameEngine\\Ernestoyaquello.Chess\\Ernestoyaquello.Chess.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\CKIRUser\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\CKIRUser\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
