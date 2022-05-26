@@ -2,18 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StdGame;
 
 public class StdChassPiece : MonoBehaviour
 {
     //define at component level
-    public Faction faction;
-    public TypeOfPiece type;
+    //public Faction faction;
+    //public TypeOfPiece type;
     public Vector3 anchor;
 
     //define at game level
     public StdChassTile tile;
-    public Chess.Piece piece;
+    //public Chess.Piece piece;
 
     
     void OnDrawGizmos()
@@ -22,17 +21,17 @@ public class StdChassPiece : MonoBehaviour
         Gizmos.DrawSphere(transform.position + anchor, 0.1f);
     }
 
-    public void Init(StdChassTile tile, Chess.Piece piece)
-    {
-        this.tile = tile;
-        this.piece = piece;
-    }
+    //public void Init(StdChassTile tile, Chess.Piece piece)
+    //{
+    //    //this.tile = tile;
+    //    //this.piece = piece;
+    //}
 
-    void Start()
-    {
-        if (piece == null) throw new Exception("piece is null must be call Init()", new NullReferenceException());
-        if (tile == null) throw new Exception("tile is null must be call Init()", new NullReferenceException());
-    }
+    //void Start()
+    //{
+    //    if (piece == null) throw new Exception("piece is null must be call Init()", new NullReferenceException());
+    //    if (tile == null) throw new Exception("tile is null must be call Init()", new NullReferenceException());
+    //}
 
     void Update()
     {

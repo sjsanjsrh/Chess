@@ -76,54 +76,54 @@ public class StdChassTile : MonoBehaviour
 
     private void ChangeButtonState()
     {
-        if (seletable)
-        {
-            if (buttonEvent.Pressed)
-            {
-                Chess.MoveMap map = piece_script?.piece.moveMap;
-                if (state == State.Moveable)
-                {
-                    SetMoveableVisual();
-                }
-                else if (map != null) // if exist pice on this tile
-                {
-                    foreach (var tile in board_script.GetTile())
-                    {
-                        tile.GetXY(out int x, out int y);
-                        if ((map.map[x, y] & Chess.MoveMap.Status.MoveAble) != 0)
-                        {
-                            tile.state = State.Moveable;
-                            tile.seletable = true;
-                            tile.SetStateVisual();
-                        }
-                        else
-                        {
-                            tile.state = State.None;
-                            tile.seletable &= tile.state != State.Moveable;
-                            tile.SetStateVisual();
-                        }
-                    }
-                    state = State.Selected;
-                    SetSelectedVisual(); 
-                }
-            }
-            else
-            {
-                if (buttonEvent.Hover)
-                {
-                    SetHoveredVisual();
-                }
-                else
-                {
-                    SetStateVisual();
-                }
-            }
-        }
-        else
-        {
-            state = State.None;
-            seletable &= state != State.Moveable;
-        }
+        //if (seletable)
+        //{
+        //    if (buttonEvent.Pressed)
+        //    {
+        //        Chess.MoveMap map = piece_script?.piece.moveMap;
+        //        if (state == State.Moveable)
+        //        {
+        //            SetMoveableVisual();
+        //        }
+        //        else if (map != null) // if exist pice on this tile
+        //        {
+        //            foreach (var tile in board_script.GetTile())
+        //            {
+        //                tile.GetXY(out int x, out int y);
+        //                if ((map.map[x, y] & Chess.MoveMap.Status.MoveAble) != 0)
+        //                {
+        //                    tile.state = State.Moveable;
+        //                    tile.seletable = true;
+        //                    tile.SetStateVisual();
+        //                }
+        //                else
+        //                {
+        //                    tile.state = State.None;
+        //                    tile.seletable &= tile.state != State.Moveable;
+        //                    tile.SetStateVisual();
+        //                }
+        //            }
+        //            state = State.Selected;
+        //            SetSelectedVisual(); 
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (buttonEvent.Hover)
+        //        {
+        //            SetHoveredVisual();
+        //        }
+        //        else
+        //        {
+        //            SetStateVisual();
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    state = State.None;
+        //    seletable &= state != State.Moveable;
+        //}
     }
    
 
@@ -159,15 +159,15 @@ public class StdChassTile : MonoBehaviour
     
     public void SetPiece()
     {
-        var piece = board_script.game.GetCurrentPice(x, y);
-        if (piece != null)
-        {
-            var piece_obj = board_script.PieceToGameObject(piece);
-            var piece_ins = Instantiate(piece_obj, transform, false);
-            piece_script = piece_ins.GetComponent<StdChassPiece>();
-            piece_script.Init(this, piece);
-            seletable = true;
-        }
+        //var piece = board_script.game.GetCurrentPice(x, y);
+        //if (piece != null)
+        //{
+        //    var piece_obj = board_script.PieceToGameObject(piece);
+        //    var piece_ins = Instantiate(piece_obj, transform, false);
+        //    piece_script = piece_ins.GetComponent<StdChassPiece>();
+        //    piece_script.Init(this, piece);
+        //    seletable = true;
+        //}
     }
 
     void SettedHover(object sender, EventArgs e)

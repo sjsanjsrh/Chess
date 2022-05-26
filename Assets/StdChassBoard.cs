@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using StdGame;
-using StdChassUnity;
-
 
 public class StdChassBoard : MonoBehaviour
 {
@@ -20,19 +17,19 @@ public class StdChassBoard : MonoBehaviour
     public float hight;
 
     //define at game level
-    public readonly StandardGame game = new StandardGame();
+    //public readonly StandardGame game = new StandardGame();
 
     private Vector3[,] anchors;
     private StdChassTile[,] m_tileMap;
 
-    public GameObject PieceToGameObject(Chess.Piece piece)
-    {
-        if (piece is Pawn)
-            return (Faction)piece.owner == Faction.Black ?
-                pieceObjects.Pawn_B : pieceObjects.Pawn_W;
-        else
-            return null;
-    }
+    //public GameObject PieceToGameObject(Chess.Piece piece)
+    //{
+    //    if (piece is Pawn)
+    //        return (Faction)piece.owner == Faction.Black ?
+    //            pieceObjects.Pawn_B : pieceObjects.Pawn_W;
+    //    else
+    //        return null;
+    //}
 
     public StdChassTile GetTile(int x, int y)
     {
@@ -45,15 +42,21 @@ public class StdChassBoard : MonoBehaviour
 
     void ComputingAnchors()
     {
+        int w, h;
         Vector2 c, s;
         Vector2 vlen = end - start;
-        s.x = vlen.x / game.BOARD_W;
-        s.y = vlen.y / game.BOARD_H;
+
+        // Todo: Get board size
+        w = 8;
+        h = 8;
+
+        s.x = vlen.x / w;
+        s.y = vlen.y / h;
         c = start + s / 2;
-        anchors = new Vector3[game.BOARD_W, game.BOARD_H];
-        for (int x = 0; x < game.BOARD_W; x++)
+        anchors = new Vector3[w, h];
+        for (int x = 0; x < w; x++)
         {
-            for (int y = 0; y < game.BOARD_H; y++)
+            for (int y = 0; y < h; y++)
             {
                 anchors[x, y] = new Vector3(c.x + x * s.x, hight, c.y + y * s.y);
             }
@@ -62,34 +65,34 @@ public class StdChassBoard : MonoBehaviour
 
     private void Awake()
     {
-        m_tileMap = new StdChassTile[game.BOARD_W, game.BOARD_H];
+        // m_tileMap = new StdChassTile[game.BOARD_W, game.BOARD_H];
     }
 
     void Start()
     {
         ComputingAnchors();
-        game.Init();
+        //game.Init();
         CreateTileObject();
     }
 
     private void CreateTileObject()
     {
-        var board = game.GetCurrentBoard();
-        Vector2 vlen = end - start;
-        var scale = new Vector3(1, 1, 1);
-        scale.x *= Mathf.Abs(vlen.x) / game.BOARD_W;
-        scale.y *= Mathf.Abs(vlen.y) / game.BOARD_H;
-        for (int y = 0; y < game.BOARD_W; y++)
-        {
-            for (int x = 0; x < game.BOARD_H; x++)
-            {
-                var tile_ins = Instantiate(tile, transform, false);
-                var tile_script = tile_ins.GetComponent<StdChassTile>();
-                m_tileMap[x, y] = tile_script;
-                tile_script.Init(this, x, y, anchors[x, y], scale);
-                tile_script.SetPiece();
-            }
-        }
+        //var board = game.GetCurrentBoard();
+        //Vector2 vlen = end - start;
+        //var scale = new Vector3(1, 1, 1);
+        //scale.x *= Mathf.Abs(vlen.x) / game.BOARD_W;
+        //scale.y *= Mathf.Abs(vlen.y) / game.BOARD_H;
+        //for (int y = 0; y < game.BOARD_W; y++)
+        //{
+        //    for (int x = 0; x < game.BOARD_H; x++)
+        //    {
+        //        var tile_ins = Instantiate(tile, transform, false);
+        //        var tile_script = tile_ins.GetComponent<StdChassTile>();
+        //        m_tileMap[x, y] = tile_script;
+        //        tile_script.Init(this, x, y, anchors[x, y], scale);
+        //        tile_script.SetPiece();
+        //    }
+        //}
     }
 
     void OnDrawGizmos()
